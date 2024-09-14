@@ -15,28 +15,30 @@ type ScanResultWithAdvice struct {
 func (s *ScanResultWithAdvice) CSV() []string {
 	var advice string
 
-	for _, value := range s.Advice.Domain {
-		advice += "Domain: " + value + "; "
-	}
+	if s.Advice != nil {
+		for _, value := range s.Advice.Domain {
+			advice += "Domain: " + value + "; "
+		}
 
-	for _, value := range s.Advice.BIMI {
-		advice += "BIMI: " + value + "; "
-	}
+		for _, value := range s.Advice.BIMI {
+			advice += "BIMI: " + value + "; "
+		}
 
-	for _, value := range s.Advice.DKIM {
-		advice += "DKIM: " + value + "; "
-	}
+		for _, value := range s.Advice.DKIM {
+			advice += "DKIM: " + value + "; "
+		}
 
-	for _, value := range s.Advice.DMARC {
-		advice += "DMARC: " + value + "; "
-	}
+		for _, value := range s.Advice.DMARC {
+			advice += "DMARC: " + value + "; "
+		}
 
-	for _, value := range s.Advice.MX {
-		advice += "MX: " + value + "; "
-	}
+		for _, value := range s.Advice.MX {
+			advice += "MX: " + value + "; "
+		}
 
-	for _, value := range s.Advice.SPF {
-		advice += "SPF: " + value + "; "
+		for _, value := range s.Advice.SPF {
+			advice += "SPF: " + value + "; "
+		}
 	}
 
 	return []string{s.ScanResult.Domain, s.ScanResult.BIMI, s.ScanResult.DKIM, s.ScanResult.DMARC, strings.Join(s.ScanResult.MX, "; "), s.ScanResult.SPF, s.ScanResult.Error, advice}

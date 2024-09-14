@@ -2,7 +2,7 @@ FROM golang:1.22-alpine3.19 AS build
 
 RUN apk add git make \
  && apk cache clean \
- && go install golang.org/x/tools/go/analysis/passes/fieldalignment/cmd/fieldalignment@latest
+ && go install github.com/dkorunic/betteralign/cmd/betteralign@latest
 
 COPY . /go/src/github.com/GlobalCyberAlliance/domain-security-scanner/
 

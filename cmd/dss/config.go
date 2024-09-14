@@ -54,7 +54,7 @@ var (
 				log.Fatal().Err(err).Msg("unable to save config")
 			}
 
-			log.Info().Msg("config updated")
+			log.Info().Msg("Config updated")
 		},
 	}
 
