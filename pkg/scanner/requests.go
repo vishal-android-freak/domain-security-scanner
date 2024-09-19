@@ -16,8 +16,8 @@ const (
 var (
 	BIMIPrefix  = DefaultBIMIPrefix
 	DKIMPrefix  = DefaultDKIMPrefix
-	DMARCPrefix = regexp.MustCompile(`^\s*v\s*=\s*DMARC1`) // Matches v=DMARC1 with whitespace (RFC7489).
-	SPFPrefix   = regexp.MustCompile(`^\s*v\s*=\s*(?i)spf1`)
+	DMARCPrefix = regexp.MustCompile(`^v\s*=\s*DMARC1`) // Matches v=DMARC1 with whitespace (RFC7489).
+	SPFPrefix   = regexp.MustCompile(`^v=(?i)spf1`)
 
 	// knownDkimSelectors is a list of known DKIM selectors.
 	knownDkimSelectors = []string{
