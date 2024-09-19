@@ -2,23 +2,22 @@ package scanner
 
 import (
 	"fmt"
+	"regexp"
 	"strings"
 
 	"github.com/miekg/dns"
 )
 
 const (
-	DefaultBIMIPrefix  = "v=BIMI1;"
-	DefaultDKIMPrefix  = "v=DKIM1;"
-	DefaultDMARCPrefix = "v=DMARC1;"
-	DefaultSPFPrefix   = "v=spf1 "
+	DefaultBIMIPrefix = "v=BIMI1;"
+	DefaultDKIMPrefix = "v=DKIM1;"
 )
 
 var (
 	BIMIPrefix  = DefaultBIMIPrefix
 	DKIMPrefix  = DefaultDKIMPrefix
-	DMARCPrefix = DefaultDMARCPrefix
-	SPFPrefix   = DefaultSPFPrefix
+	DMARCPrefix = regexp.MustCompile(`^\s*v\s*=\s*DMARC1`) // Matches v=DMARC1 with whitespace (RFC7489).
+	SPFPrefix   = regexp.MustCompile(`^\s*v\s*=\s*(?i)spf1`)
 
 	// knownDkimSelectors is a list of known DKIM selectors.
 	knownDkimSelectors = []string{
@@ -171,7 +170,7 @@ func (s *Scanner) getTypeDMARC(domain string) (string, error) {
 		}
 
 		for index, record := range records {
-			if strings.HasPrefix(record, DMARCPrefix) {
+			if DMARCPrefix.Match([]byte(record)) {
 				// TXT records can be split across multiple strings, so we need to join them
 				return strings.Join(records[index:], ""), nil
 			}
@@ -190,7 +189,7 @@ func (s *Scanner) getTypeSPF(domain string) (string, error) {
 	}
 
 	for _, record := range records {
-		if strings.HasPrefix(record, SPFPrefix) {
+		if SPFPrefix.Match([]byte(record)) {
 			if !strings.Contains(record, "redirect=") {
 				return record, nil
 			}
