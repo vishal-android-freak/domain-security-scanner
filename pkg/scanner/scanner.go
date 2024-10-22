@@ -9,7 +9,7 @@ import (
 	"sync/atomic"
 	"time"
 
-	"github.com/GlobalCyberAlliance/domain-security-scanner/v3/pkg/cache"
+	"github.com/globalcyberalliance/domain-security-scanner/v3/pkg/cache"
 	"github.com/miekg/dns"
 	"github.com/panjf2000/ants/v2"
 	"github.com/pkg/errors"

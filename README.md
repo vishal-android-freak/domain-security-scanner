@@ -8,7 +8,7 @@ at [https://dmarcguide.globalcyberalliance.org](https://dmarcguide.globalcyberal
 ## Download
 
 You can download pre-compiled binaries for macOS, Linux and Windows from
-the [releases](https://github.com/GlobalCyberAlliance/domain-security-scanner/releases) page.
+the [releases](https://github.com/globalcyberalliance/domain-security-scanner/releases) page.
 
 Alternatively, you can run the binary from within our pre-built Docker image:
 
@@ -21,7 +21,7 @@ docker run ghcr.io/globalcyberalliance/domain-security-scanner:latest
 To build this application, you'll need [Go](https://golang.org/) installed.
 
 ```shell
-git clone https://github.com/GlobalCyberAlliance/domain-security-scanner.git
+git clone https://github.com/globalcyberalliance/domain-security-scanner.git
 cd domain-security-scanner
 make
 ```

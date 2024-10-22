@@ -3,10 +3,10 @@ package main
 import (
 	"time"
 
-	"github.com/GlobalCyberAlliance/domain-security-scanner/v3/pkg/advisor"
-	"github.com/GlobalCyberAlliance/domain-security-scanner/v3/pkg/http"
-	"github.com/GlobalCyberAlliance/domain-security-scanner/v3/pkg/mail"
-	"github.com/GlobalCyberAlliance/domain-security-scanner/v3/pkg/scanner"
+	"github.com/globalcyberalliance/domain-security-scanner/v3/pkg/advisor"
+	"github.com/globalcyberalliance/domain-security-scanner/v3/pkg/http"
+	"github.com/globalcyberalliance/domain-security-scanner/v3/pkg/mail"
+	"github.com/globalcyberalliance/domain-security-scanner/v3/pkg/scanner"
 	"github.com/spf13/cobra"
 )
 

@@ -3,8 +3,8 @@ package model
 import (
 	"strings"
 
-	"github.com/GlobalCyberAlliance/domain-security-scanner/v3/pkg/advisor"
-	"github.com/GlobalCyberAlliance/domain-security-scanner/v3/pkg/scanner"
+	"github.com/globalcyberalliance/domain-security-scanner/v3/pkg/advisor"
+	"github.com/globalcyberalliance/domain-security-scanner/v3/pkg/scanner"
 )
 
 type ScanResultWithAdvice struct {
