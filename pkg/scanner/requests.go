@@ -18,6 +18,7 @@ var (
 	DKIMPrefix  = DefaultDKIMPrefix
 	DMARCPrefix = regexp.MustCompile(`^v\s*=\s*DMARC1`) // Matches v=DMARC1 with whitespace (RFC7489).
 	SPFPrefix   = regexp.MustCompile(`^v=(?i)spf1`)
+	EscapeDKIMPrefix = regexp.MustCompile(`[\\"]`)
 
 	// knownDkimSelectors is a list of known DKIM selectors.
 	knownDkimSelectors = []string{
@@ -146,11 +147,15 @@ func (s *Scanner) getTypeDKIM(domain string) (string, error) {
 			return "", err
 		}
 
-		for index, record := range records {
-			if strings.HasPrefix(record, DKIMPrefix) {
-				// TXT records can be split across multiple strings, so we need to join them
-				return strings.Join(records[index:], ""), nil
-			}
+		// Join all parts of the TXT record to ensure the complete DKIM string is captured.
+		completeRecord := strings.Join(records, "")
+
+		// Clean up by removing backslashes and double quotes
+		cleanRecord := EscapeDKIMPrefix.ReplaceAllString(completeRecord, "")
+
+		// Check if the DKIM prefix is present in the clean record
+		if strings.HasPrefix(cleanRecord, DKIMPrefix) {
+			return cleanRecord, nil
 		}
 	}
 
