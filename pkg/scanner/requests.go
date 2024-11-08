@@ -147,15 +147,15 @@ func (s *Scanner) getTypeDKIM(domain string) (string, error) {
 			return "", err
 		}
 
-		// Join all parts of the TXT record to ensure the complete DKIM string is captured.
-		completeRecord := strings.Join(records, "")
+		for index, record := range records {
 
-		// Clean up by removing backslashes and double quotes
-		cleanRecord := EscapeDKIMPrefix.ReplaceAllString(completeRecord, "")
+			// check if the string contains the DKIM prefix
+			if strings.Contains(record, DKIMPrefix) {
+				// Clean up by removing backslashes and double quotes
+				cleanRecord := EscapeDKIMPrefix.ReplaceAllString(record[index:], "")
 
-		// Check if the DKIM prefix is present in the clean record
-		if strings.HasPrefix(cleanRecord, DKIMPrefix) {
-			return cleanRecord, nil
+				return cleanRecord, nil
+			}
 		}
 	}
 
